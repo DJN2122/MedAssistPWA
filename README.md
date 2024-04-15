@@ -1,3 +1,5 @@
+![MedAssist Logo](MedAssist-logo-poppins.png)
+
 # MedAssist
 
 ## Overview
@@ -43,7 +45,7 @@ After forking the project, it is essential to configure the application with you
      ```
 
 - **Google Places API Key**:
-   - Locate the `index.html` file.
+   - Open the `index.html` file.
    - On line 35, replace the placeholder `"INSERT OPENAI API KEY HERE"` with your Google Places API key in the script source URL:
      ```html
      <script src="https://maps.googleapis.com/maps/api/js?key=INSERT OPENAI API KEY HERE&callback=initMap" async defer></script>
