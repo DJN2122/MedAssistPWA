@@ -21,17 +21,36 @@ MedAssist is a personal project designed to bridge the gap between advanced arti
 
 ## Configuration Instructions
 
-After forking the project, you will need to configure the application with your own API keys to fully enable all its features:
+After forking the project, it is essential to configure the application with your own API keys to enable all features fully. Here's how you can set up each component:
 
 - **OpenAI API Key**:
-   - Navigate to `Program.cs`.
-   - Replace `"INSERT OPENAI API KEY HERE"` with your actual OpenAI API key in the OpenAiService registration line.
+   - Open the `Program.cs` file.
+   - Locate line 19 and replace `"INSERT OPENAI API KEY HERE"` with your actual OpenAI API key. The line looks like this:
+     ```csharp
+     builder.Services.AddSingleton(new OpenAiService("INSERT OPENAI API KEY HERE"));
+     ```
 
 - **Azure Speech Services**:
-   - For speech-to-text and text-to-speech functionality, update the Azure subscription key in `MedAssistantChat.razor.cs` and the `speech-to-text.js` file with your key.
+   - Open the `MedAssistantChat.razor.cs` file.
+   - Navigate to line 154 and insert your Azure subscription key in place of `"INSERT OPENAI API KEY HERE"`. Here’s how it appears:
+     ```csharp
+     string subscriptionKey = "INSERT OPENAI API KEY HERE";
+     ```
+   - Additionally, update the `speech-to-text.js` file:
+     - Find line 3 and replace `"INSERT OPENAI API KEY HERE"` with your subscription key. Make sure the `serviceRegion` is set correctly (e.g., `"westeurope"`):
+     ```javascript
+     var subscriptionKey = "INSERT OPENAI API KEY HERE", serviceRegion = "westeurope";
+     ```
 
 - **Google Places API Key**:
-   - For the local healthcare provider locator feature, replace the placeholder in the `index.html` with your Google Places API key.
+   - Locate the `index.html` file.
+   - On line 35, replace the placeholder `"INSERT OPENAI API KEY HERE"` with your Google Places API key in the script source URL:
+     ```html
+     <script src="https://maps.googleapis.com/maps/api/js?key=INSERT OPENAI API KEY HERE&callback=initMap" async defer></script>
+     ```
+
+Please ensure that all API keys are correctly inserted to take full advantage of MedAssist’s capabilities, from AI-powered interactions to local healthcare service mapping.
+
 
 ### Running the Application
 
