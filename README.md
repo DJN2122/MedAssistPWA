@@ -2,7 +2,7 @@
 
 ## Overview
 
-MedAssist is a personal project designed to bridge the gap between advanced artificial intelligence and practical healthcare applications. It's an AI medical assistant web application developed using Blazor WebAssembly. The application incorporates OpenAI's language models and Google Places API to provide accurate medical consultations and local healthcare information. This platform facilitates instant, AI-driven responses to medical queries and helps users locate nearby healthcare services like hospitals and gyms.
+MedAssist is a personal project designed to bridge the gap between advanced artificial intelligence and practical healthcare applications. It's an AI medical assistant web application developed using Blazor WebAssembly. The application integrates OpenAI's language models, Azure Speech Services, and Google Places API to deliver accurate medical consultations, enhance accessibility with speech-to-text and text-to-speech functionality, and provide local healthcare information. This robust platform offers instant, AI-driven responses to medical queries and helps users find nearby healthcare services like hospitals and gyms, ensuring a seamless user experience.
 
 ## Key Features
 
