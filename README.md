@@ -1,4 +1,4 @@
-![MedAssist Logo](MedAssist-logo-poppins.png)
+![MedAssist Logo](wwwroot/MedAssist-logo-poppins.png)
 
 # MedAssist
 
