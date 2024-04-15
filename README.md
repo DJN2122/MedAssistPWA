@@ -32,21 +32,21 @@ After forking the project, it is essential to configure the application with you
 
 - **Azure Speech Services**:
    - Open the `MedAssistantChat.razor.cs` file.
-   - Navigate to line 154 and insert your Azure subscription key in place of `"INSERT OPENAI API KEY HERE"`. Here’s how it appears:
+   - Navigate to line 154 and insert your Azure subscription key in place of `"INSERT AZURE API KEY HERE"`. Here’s how it appears:
      ```csharp
-     string subscriptionKey = "INSERT OPENAI API KEY HERE";
+     string subscriptionKey = "INSERT AZURE API KEY HERE";
      ```
    - Additionally, update the `speech-to-text.js` file:
-     - Find line 3 and replace `"INSERT OPENAI API KEY HERE"` with your subscription key. Make sure the `serviceRegion` is set correctly (e.g., `"westeurope"`):
+     - Find line 3 and replace `"INSERT AZURE API KEY HERE"` with your subscription key. Make sure the `serviceRegion` is set correctly (e.g., `"westeurope"`):
      ```javascript
-     var subscriptionKey = "INSERT OPENAI API KEY HERE", serviceRegion = "westeurope";
+     var subscriptionKey = "INSERT AZURE API KEY HERE", serviceRegion = "westeurope";
      ```
 
 - **Google Places API Key**:
    - Open the `index.html` file.
-   - On line 35, replace the placeholder `"INSERT OPENAI API KEY HERE"` with your Google Places API key in the script source URL:
+   - On line 35, replace the placeholder `"INSERT GOOGLE PLACES API KEY HERE"` with your Google Places API key in the script source URL:
      ```html
-     <script src="https://maps.googleapis.com/maps/api/js?key=INSERT OPENAI API KEY HERE&callback=initMap" async defer></script>
+     <script src="https://maps.googleapis.com/maps/api/js?key=INSERT GOOGLE PLACES API KEY HERE&callback=initMap" async defer></script>
      ```
 
 Please ensure that all API keys are correctly inserted to take full advantage of MedAssist’s capabilities, from AI-powered interactions to local healthcare service mapping.

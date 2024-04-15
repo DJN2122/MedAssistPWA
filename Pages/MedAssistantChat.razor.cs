@@ -151,7 +151,7 @@ namespace MedAssistPWA.Pages
         }
 
         // for text-to-speech part
-        string subscriptionKey = "INSERT OPENAI API KEY HERE"; 
+        string subscriptionKey = "INSERT AZURE API KEY HERE"; 
         string region = "westeurope"; 
         private string _base64EncodedAudio;
 

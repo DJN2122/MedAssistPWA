@@ -1,6 +1,6 @@
 ﻿window.initializeSpeechToText = function(dotNetObjectRef) {
     window.SpeechToTextFromMic = async function () {
-        var subscriptionKey = "INSERT OPENAI API KEY HERE", serviceRegion = "westeurope";
+        var subscriptionKey = "INSERT AZURE API KEY HERE", serviceRegion = "westeurope";
         var SpeechSDK;
         var playbutton;
         var resultText;
