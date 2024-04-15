@@ -1,0 +1,302 @@
+﻿@page "/"
+@inject IJSRuntime JSRuntime
+@inject ISnackbar Snackbar
+
+<style>
+    body, html {
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden; /* Prevents horizontal scrolling */
+    }
+
+    * {
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+    }
+
+    #canvas-container {
+        position: absolute; /* Positioned absolutely within relative body/html */
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 50vh; /* Keep or adjust based on your preference */
+        overflow: hidden;
+        margin-top: 1vh; /* Adjust as needed to position correctly */
+    }
+
+    canvas {
+        position: absolute;
+        left: 0;
+        top: 0; /* Aligns to the top of its container */
+        width: 100%;
+        height: 100%; /* Ensures canvas fills its container */
+        cursor: default;
+        z-index: -1; /* Behind other content but above the background */
+    }
+
+    .container-upward {
+        padding-top: 15vh; /* Increase this value to move content down further */
+    }
+
+</style>
+
+<div id="canvas-container"></div> <!-- Canvas container -->
+
+<MudContainer Class="justify-start align-start d-flex flex-column container-upward" MaxWidth="MaxWidth.ExtraExtraLarge" Style="text-align:left; margin-bottom: 3rem;">
+    <div>
+        <MudText Typo="Typo.h3" Color="Color.Primary" GutterBottom="true">
+            <span id="typewriterText" class="typewriter-text"></span>
+        </MudText>
+    </div>
+    <MudStack Spacing="4">
+        <MudText Typo="Typo.h5" Color="Color.Primary" GutterBottom="true">24/7 health support, simplified for anyone to use</MudText>
+        <MudButton Color="Color.Primary" Variant="Variant.Filled" Href="/medassist" Size="Size.Large" StartIcon="@Icons.Material.Filled.Chat" Style="font-size: 18px; padding: 12px 24px; z-index: 1000; position: relative;">
+            Explore AI-Powered Health Support
+        </MudButton>
+
+        <!-- Check Circle Icons with Text -->
+        <MudText Typo="Typo.h5">
+            <div style="display: flex; align-items: center;">
+                <MudIcon Icon="@Icons.Material.Filled.CheckCircle" Color="Color.Primary" />
+                <span style="margin-left: 8px;">Instant, accurate health advice 24/7</span>
+            </div>
+        </MudText>
+        <MudText Typo="Typo.h5">
+            <div style="display: flex; align-items: center;">
+                <MudIcon Icon="@Icons.Material.Filled.CheckCircle" Color="Color.Primary" />
+                <span style="margin-left: 8px;">Personalised health support based on your health data</span>
+            </div>
+        </MudText>
+        <MudText Typo="Typo.h5">
+            <div style="display: flex; align-items: center;">
+                <MudIcon Icon="@Icons.Material.Filled.CheckCircle" Color="Color.Primary" />
+                <span style="margin-left: 8px;">Seamless integration of voice commands for ease of use</span>
+            </div>
+        </MudText>
+
+        <!-- Side by side video and Problem / Solution Section -->
+        <MudGrid>
+            <MudItem xs="12" md="6">
+                <div style="padding: 20px; display: flex; justify-content: center; align-items: center; position: relative;">
+                    <!-- Embed the YouTube video using iframe with correct aspect ratio -->
+                    <div style="overflow: hidden; position: relative; width: 100%; height: 0; padding-bottom: 56.25%;">
+                        <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/m513-dRxmVY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </MudItem>
+
+            <MudItem xs="12" md="6">
+                <MudText Typo="Typo.h5" Color="Color.Primary" GutterBottom="true">Your Health Questions Answered & Resolved</MudText>
+                <MudText>
+                    <div style="display: flex; align-items: center; margin-bottom: 24px;">
+                        <MudIcon Icon="@Icons.Material.Filled.Info" Color="Color.Info" />
+                        <span style="margin-left: 8px;">Finding reliable health information online can be challenging and stressful. Our platform aims to alleviate these concerns by providing trustworthy guidance.</span>
+                    </div>
+                </MudText>
+                <MudText>
+                    <div style="display: flex; align-items: center; margin-bottom: 24px;">
+                        <MudIcon Icon="@Icons.Material.Filled.Info" Color="Color.Info" />
+                        <span style="margin-left: 8px;">MedAssist offers a user-friendly interface for health inquiries, delivering precise answers powered by OpenAI. Features include text-to-speech for enhanced accessibility.</span>
+                    </div>
+                </MudText>
+                <MudText>
+                    <div style="display: flex; align-items: center; margin-bottom: 24px;">
+                        <MudIcon Icon="@Icons.Material.Filled.Info" Color="Color.Info" />
+                        <span style="margin-left: 8px;">Our service enables users to make informed decisions, confidently navigating health concerns through typed or voice commands.</span>
+                    </div>
+                </MudText>
+            </MudItem>
+        </MudGrid>
+
+        <!-- Introduce Your Benefits Section with Centered Content -->
+        <MudText Typo="Typo.h5" Color="Color.Primary" GutterBottom="true" Align="Align.Center">Discover the Benefits of MedAssist</MudText>
+
+        <MudGrid>
+            <MudItem xs="12" sm="4">
+                <MudCard Outlined Class="pa-4 d-flex flex-column align-items-center justify-content-center">
+                    <MudIcon Icon="@Icons.Material.Filled.HealthAndSafety" Size="Size.Large" Color="Color.Primary" Class="my-2" Style="align-self: center;" />
+                    <MudText Typo="Typo.h6" Color="Color.Primary" Align="Align.Center">Instant Health Insights</MudText>
+                    <MudText Align="Align.Center">Ask any health-related question and get immediate AI-powered advice.</MudText>
+                </MudCard>
+            </MudItem>
+
+            <MudItem xs="12" sm="4">
+                <MudCard Outlined Class="pa-4 d-flex flex-column align-items-center justify-content-center">
+                    <MudIcon Icon="@Icons.Material.Filled.Mic" Size="Size.Large" Color="Color.Primary" Class="my-2" Style="align-self: center;" />
+                    <MudText Typo="Typo.h6" Color="Color.Primary" Align="Align.Center">Voice-Activated Queries</MudText>
+                    <MudText Align="Align.Center">Utilise speech-to-text for hands-free question input and accessibility.</MudText>
+                </MudCard>
+            </MudItem>
+
+            <MudItem xs="12" sm="4">
+                <MudCard Outlined Class="pa-4 d-flex flex-column align-items-center justify-content-center">
+                    <MudIcon Icon="@Icons.Material.Filled.VolumeUp" Size="Size.Large" Color="Color.Primary" Class="my-2" Style="align-self: center;" />
+                    <MudText Typo="Typo.h6" Color="Color.Primary" Align="Align.Center">Accessible Health Support</MudText>
+                    <MudText Align="Align.Center">Text-to-speech responses make health advice available to everyone.</MudText>
+                </MudCard>
+            </MudItem>
+        </MudGrid>
+
+        <!-- Testimonials Section -->
+        <MudText Typo="Typo.h5" Color="Color.Primary" GutterBottom="true" Align="Align.Center">Real Impact: User Stories</MudText>
+
+        <MudGrid>
+            <MudItem xs="12" sm="4">
+                <MudCard Outlined Class="pa-4 d-flex flex-column align-items-center justify-content-center text-center" Style="height: 100%;">
+                    <MudText Typo="Typo.body1" Align="Align.Center" Class="my-2">"MedAssist quickly provided reliable health advice. It's become my trusted source for health queries due to its ease of use and accessibility."</MudText>
+                    <div style="display: flex; justify-content: center; align-items: center; width: 100%;">
+                        <span style="margin-right: 8px;">
+                            <MudText Typo="Typo.subtitle1" Color="Color.Primary">John Doe</MudText>
+                        </span>
+                        <MudRating Color="Color.Warning" ReadOnly Value="5" Max="5" Size="Size.Medium" />
+                    </div>
+                </MudCard>
+            </MudItem>
+
+            <MudItem xs="12" sm="4">
+                <MudCard Outlined Class="pa-4 d-flex flex-column align-items-center justify-content-center text-center" Style="height: 100%;">
+                    <MudText Typo="Typo.body1" Align="Align.Center" Class="my-2">"MedAssist's clear and concise advice brought peace of mind during a stressful period. Highly recommend for accurate health information."</MudText>
+                    <div style="display: flex; justify-content: center; align-items: center; width: 100%;">
+                        <span style="margin-right: 8px;">
+                            <MudText Typo="Typo.subtitle1" Color="Color.Primary">Jane Smith</MudText>
+                        </span>
+                        <MudRating Color="Color.Warning" ReadOnly Value="5" Max="5" Size="Size.Medium" />
+                    </div>
+                </MudCard>
+            </MudItem>
+
+            <MudItem xs="12" sm="4">
+                <MudCard Outlined Class="pa-4 d-flex flex-column align-items-center justify-content-center text-center" Style="height: 100%;">
+                    <MudText Typo="Typo.body1" Align="Align.Center" Class="my-2">"Impressed by the swift, accurate advice from MedAssist. It's like 24/7 access to health support, enhancing my health and wellness journey."</MudText>
+                    <div style="display: flex; justify-content: center; align-items: center; width: 100%;">
+                        <span style="margin-right: 8px;">
+                            <MudText Typo="Typo.subtitle1" Color="Color.Primary">Alex Johnson</MudText>
+                        </span>
+                        <MudRating Color="Color.Warning" ReadOnly Value="5" Max="5" Size="Size.Medium" />
+                    </div>
+                </MudCard>
+            </MudItem>
+        </MudGrid>
+        <MudText Typo="Typo.body2" Align="Align.Center">
+            We have 50+ 5-Star Reviews on <MudIcon Icon="@Icons.Material.Filled.Star" /> Google
+        </MudText>
+
+        <!-- Key Highlights Section -->
+        <MudText Typo="Typo.h5" Color="Color.Primary" GutterBottom="true" Align="Align.Center">Key Highlights</MudText>
+
+        <MudGrid Justify="Justify.Center">
+            <MudItem xs="12" sm="4" Class="feature-item">
+                <div style="display: flex; align-items: center; justify-content: center; padding: 10px;">
+                    <MudIcon Icon="@Icons.Material.Filled.StarRate" Color="Color.Primary" />
+                    <MudText Typo="Typo.body1">
+                        <span style="margin-left: 8px;">Feature 1 - Efficient Workflows</span>
+                    </MudText>
+                </div>
+            </MudItem>
+            <MudItem xs="12" sm="4" Class="feature-item">
+                <div style="display: flex; align-items: center; justify-content: center; padding: 10px;">
+                    <MudIcon Icon="@Icons.Material.Filled.Speed" Color="Color.Primary" />
+                    <MudText Typo="Typo.body1">
+                        <span style="margin-left: 8px;">Feature 2 - Quick Navigation</span>
+                    </MudText>
+                </div>
+            </MudItem>
+            <MudItem xs="12" sm="4" Class="feature-item">
+                <div style="display: flex; align-items: center; justify-content: center; padding: 10px;">
+                    <MudIcon Icon="@Icons.Material.Filled.Visibility" Color="Color.Primary" />
+                    <MudText Typo="Typo.body1">
+                        <span style="margin-left: 8px;">Feature 3 - Clear Visibility</span>
+                    </MudText>
+                </div>
+            </MudItem>
+            <MudItem xs="12" sm="4" Class="feature-item">
+                <div style="display: flex; align-items: center; justify-content: center; padding: 10px;">
+                    <MudIcon Icon="@Icons.Material.Filled.ThumbUp" Color="Color.Primary" />
+                    <MudText Typo="Typo.body1">
+                        <span style="margin-left: 8px;">Feature 4 - User Approval</span>
+                    </MudText>
+                </div>
+            </MudItem>
+            <MudItem xs="12" sm="4" Class="feature-item">
+                <div style="display: flex; align-items: center; justify-content: center; padding: 10px;">
+                    <MudIcon Icon="@Icons.Material.Filled.Smartphone" Color="Color.Primary" />
+                    <MudText Typo="Typo.body1">
+                        <span style="margin-left: 8px;">Feature 5 - Mobile Friendly</span>
+                    </MudText>
+                </div>
+            </MudItem>
+            <MudItem xs="12" sm="4" Class="feature-item">
+                <div style="display: flex; align-items: center; justify-content: center; padding: 10px;">
+                    <MudIcon Icon="@Icons.Material.Filled.Update" Color="Color.Primary" />
+                    <MudText Typo="Typo.body1">
+                        <span style="margin-left: 8px;">Feature 6 - Regular Updates</span>
+                    </MudText>
+                </div>
+            </MudItem>
+        </MudGrid>
+
+        <!-- FAQs Section -->
+        <MudText Typo="Typo.h5" Color="Color.Primary" GutterBottom="true" Align="Align.Center">FAQs</MudText>
+        <MudExpansionPanels>
+            <MudExpansionPanel Style="background-color: #e0f7fa;" Text="What is MedAssist?" MaxHeight="150">
+                MedAssist is an AI-powered platform designed to provide instant health advice and support, making healthcare information accessible and personalized for everyone, anytime.
+            </MudExpansionPanel>
+            <MudExpansionPanel Style="background-color: #e0f7fa;" Text="How does MedAssist ensure the accuracy of health advice?" MaxHeight="500">
+                Our AI is trained on vast, verified medical databases and constantly updated to reflect the latest health guidelines, ensuring you receive reliable and up-to-date advice.
+            </MudExpansionPanel>
+            <MudExpansionPanel Style="background-color: #e0f7fa;" Text="Can I use MedAssist for emergency medical situations?" MaxHeight="1000">
+                MedAssist is not a substitute for professional medical help in emergencies. In case of a serious health concern, we advise you to contact emergency services immediately.
+            </MudExpansionPanel>
+            <MudExpansionPanel Style="background-color: #e0f7fa;" Text="Is MedAssist available 24/7?">
+                Yes, MedAssist is available at any time to provide you with health support, thanks to our AI's round-the-clock service.
+            </MudExpansionPanel>
+            <MudExpansionPanel Style="background-color: #e0f7fa;" Text="Does MedAssist protect my personal health data?">
+                Your privacy is our top priority. MedAssist uses state-of-the-art security measures to protect your personal health information and ensure it remains confidential.
+            </MudExpansionPanel>
+        </MudExpansionPanels>
+
+        <!-- CTA Section -->
+        <MudText Typo="Typo.h5" Color="Color.Primary" GutterBottom="true" Align="Align.Center">Unlock Your Personalized Health Assistant Now!</MudText>
+        <MudButton Color="Color.Primary" Variant="Variant.Filled" Href="/medassist" Size="Size.Large" StartIcon="@Icons.Material.Filled.Chat" Style="font-size: 18px; padding: 12px 24px; z-index: 1000; position: relative;">
+            Explore AI-Powered Health Support
+        </MudButton>
+
+
+    </MudStack>
+</MudContainer>
+
+@code {
+    @code {
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+            if (firstRender)
+            {
+                try
+                {
+                    var text = "Get personalised health support powered by AI, ready whenever you need it!";
+                    var typingSpeed = 50;
+                    var deletionSpeed = 100;
+
+                    await JSRuntime.InvokeVoidAsync("typeWriter", "typewriterText", text, typingSpeed, deletionSpeed);
+
+                    // Load and execute the external JS for canvas animation
+                    await JSRuntime.InvokeVoidAsync("createDynamicCanvas");
+                }
+                catch (JSException)
+                {
+                    Snackbar.Add("There was an issue loading personalized features. Please try reloading the page.", Severity.Error, config =>
+                    {
+                        config.ShowCloseIcon = true;
+                        config.VisibleStateDuration = 5000; // Display for 5000ms
+                    });
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"An unexpected error occurred: {ex.Message}");
+                    // Handle other types of exceptions if necessary
+                }
+            }
+        }
+    }
+
+}

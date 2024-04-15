@@ -1,0 +1,95 @@
+﻿@inherits LayoutComponentBase
+@inject IJSRuntime JSRuntime
+
+<div class="page-container">
+    <MudLayout style="flex-grow: 1; display: flex; flex-direction: column;">
+        <MudAppBar Elevation="0">
+            <MudLink Href="/" Underline="Underline.None" Style="display: flex; align-items: center; justify-content: center; height: 100%;">
+                <img src="MedAssist-logo-poppins.png" alt="MedAssist Logo" style="height: auto; max-height: 90%;" />
+            </MudLink>
+            <MudSpacer />
+            <MudStack Row Spacing="4">
+                <MudLink Underline="Underline.Hover" Href="/" Color="Color.Secondary">
+                    <div style="display: flex; align-items: center;">
+                        <MudIcon Icon="@Icons.Material.Filled.Home" />
+                        <span style="margin-left: 5px;">Home</span>
+                    </div>
+                </MudLink>
+                <MudLink Underline="Underline.Hover" Href="/medassist" Color="Color.Secondary">
+                    <div style="display: flex; align-items: center;">
+                        <MudIcon Icon="@Icons.Material.Filled.LocalHospital" />
+                        <span style="margin-left: 5px;">MedAssist</span>
+                    </div>
+                </MudLink>
+                <MudLink Underline="Underline.Hover" Href="/info" Color="Color.Secondary">
+                    <div style="display: flex; align-items: center;">
+                        <MudIcon Icon="@Icons.Material.Filled.Info" />
+                        <span style="margin-left: 5px;">Info</span>
+                    </div>
+                </MudLink>
+            </MudStack>
+        </MudAppBar>
+
+        <MudMainContent style="flex-grow: 1;">
+            <MudContainer MaxWidth="MaxWidth.Large" Class="my-16 pt-16">
+                @Body
+            </MudContainer>
+        </MudMainContent>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <MudText Color="Color.Secondary" Typo="Typo.subtitle2">© 2024 Copyright: David Niculita</MudText>
+        </footer>
+    </MudLayout>
+
+    <MudFab Color="Color.Primary" Variant="Variant.Filled" Size="Size.Small" StartIcon="@Icons.Material.Filled.KeyboardArrowUp" Class="back-to-top" OnClick="ScrollToTop" Style="display:none; position: fixed; right: 0.5rem; bottom: 3.5rem;" />
+</div>
+
+<style>
+    .page-container {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+    }
+
+    .footer {
+        width: 100%;
+        text-align: center;
+        padding: 1rem 0;
+        background: linear-gradient(45deg, #0080FF, #5A2BE2) !important;
+        margin-top: auto; /* This pushes the footer to the bottom */
+    }
+</style>
+
+<script>
+    window.initializeBackToTopButtonVisibility = () => {
+        const backToTopButton = document.querySelector('.back-to-top');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 250) {
+                backToTopButton.style.display = 'flex';
+            } else {
+                backToTopButton.style.display = 'none';
+            }
+        });
+    };
+</script>
+
+@code {
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JSRuntime.InvokeVoidAsync("initializeBackToTopButtonVisibility");
+        }
+    }
+
+    private async Task ScrollToTop()
+    {
+        await JSRuntime.InvokeVoidAsync("scrollTo", new { top = 0, behavior = "smooth" });
+    }
+}
+
+<MyMudThemeProvider />
+<MudDialogProvider />
+<MudSnackbarProvider />

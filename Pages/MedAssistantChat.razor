@@ -1,0 +1,112 @@
+﻿@page "/medassist"
+@inject IJSRuntime JSRuntime
+@inject ISnackbar Snackbar
+@using Microsoft.AspNetCore.Components
+
+<div style="margin-top: -100px;">
+    <MudText Typo="Typo.h3" Color="Color.Primary" GutterBottom="true">
+        <span id="typewriterText" class="typewriter-text"></span>
+    </MudText>
+</div>
+
+<MudContainer Class="d-flex flex-column" MaxWidth="MaxWidth.ExtraExtraLarge">
+    <MudGrid>
+        <MudItem xs="12" sm="6">
+            <MudText Typo="Typo.h5" GutterBottom="true">Patient:</MudText>
+            <MudPaper MaxHeight="500px" Elevation="0" Class="border-solid border-2 pa-4" Style="min-height:500px; overflow-y:scroll;">
+               <MudStack Spacing="4">
+                    @foreach (var message in UserMessages)
+                    {
+                        <MudAlert Severity="Severity.Info" Variant="Variant.Filled" Icon="@Icons.Material.Filled.Person">@message</MudAlert>
+                    }
+               </MudStack>
+            </MudPaper>
+            <MudStack Row Class="pt-4">
+                <MudTextField Placeholder="Enter your query here or use voice record..." @bind-Value="query" Variant="Variant.Outlined"
+                              id="txtPrompt" Margin="Margin.Dense" HelperText="Note: No need to press send icon when using voice record feature."/>
+
+                <MudIconButton Color="Color.Primary" Variant="Variant.Filled" Icon="@Icons.Material.Filled.Mic" id="playbutton" OnClick="@TriggerCallSpeechToText" Class="mt-2" />
+                <MudIconButton Color="Color.Primary" Variant="Variant.Filled" Icon="@Icons.Material.Filled.Send" OnClick="@HandleSendButtonClick" Class="mt-2" />
+            </MudStack>
+
+        </MudItem>
+        <MudItem xs="12" sm="6">
+            <MudText Typo="Typo.h5" GutterBottom="true">MedAssist Response:</MudText>
+            <MudPaper MaxHeight="500px" Elevation="0" Class="border-solid border-2 py-4 px-2" Style="min-height:500px; overflow-y:scroll;">
+                <MudStack Spacing="4" Class="my-2">
+                    @foreach (var response in AiMessages)
+                    {
+                        <MudAlert Severity="Severity.Normal" Variant="Variant.Filled" Icon="@Icons.Material.Filled.SupportAgent">@response</MudAlert>
+                    }
+                    @if (AiMessages.Any())
+                    {
+                        <MudIconButton Color="Color.Primary" Variant="Variant.Filled" Icon="@Icons.Material.Filled.RecordVoiceOver" OnClick="@TextToSpeech" Class="mt-2" />
+                    }
+
+                </MudStack>
+                @if (!string.IsNullOrEmpty(_base64EncodedAudio))
+                {
+                    <audio controls autobuffer="autobuffer" autoplay="autoplay">
+                        <source src="@($"data:audio/mp3;base64,{_base64EncodedAudio}")" type="audio/mpeg" />
+                    </audio>
+                }
+            </MudPaper>
+
+            <MudPaper Elevation="0" Class="my-2" Style="background-color: #e0f7fa; padding: 10px;">
+                <!-- Reduced padding for tighter space -->
+                <MudText Typo="Typo.h6" Color="Color.Primary" GutterBottom="true" Style="font-size: 0.8rem;">Generate Your MedAssist Report</MudText>
+                <div style="display: flex; align-items: center; font-size: 0.7rem;" class="mb-1">
+                    <!-- Smaller font size for text -->
+                    <MudIcon Icon="@Icons.Material.Filled.FileCopy" Color="Color.Primary" />
+                    <span style="margin-left: 8px;">
+                        Click the button to download a comprehensive report of your MedAssist session, suitable for personal record or professional review.
+                    </span>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.7rem;">
+                    <MudButton OnClick="GeneratePdfReport" Variant="Variant.Filled" Color="Color.Primary" EndIcon="@Icons.Material.Filled.FileCopy">Generate Your MedAssist Report</MudButton>
+                </div>
+            </MudPaper>
+
+        </MudItem>
+    </MudGrid>
+
+    <MudGrid>
+        <MudItem xs="12">
+            <MudPaper Elevation="0" Class="my-2" Style="background-color: #e0f7fa; padding: 10px;">
+                <!-- Reduced padding for tighter space -->
+                <MudText Typo="Typo.h6" Color="Color.Primary" GutterBottom="true" Style="font-size: 0.8rem;">Disclaimer</MudText> <!-- Smaller heading font size -->
+                <div style="display: flex; align-items: center; font-size: 0.7rem;" class="mb-1">
+                    <!-- Smaller font size for text -->
+                    <MudIcon Icon="@Icons.Material.Filled.Warning" Color="Color.Warning" />
+                    <span style="margin-left: 8px;">
+                        MedAssist is an AI-based support tool, not a replacement for professional medical advice. Consult with a healthcare provider for medical issues.
+                    </span>
+                </div>
+                <div style="display: flex; align-items: center; font-size: 0.7rem;">
+                    <!-- Smaller font size for text -->
+                    <MudIcon Icon="@Icons.Material.Filled.Info" Color="Color.Info" />
+                    <span style="margin-left: 8px;">
+                        Protect your privacy. Do not share sensitive information online. See our privacy policy for details.
+                    </span>
+                </div>
+            </MudPaper>
+        </MudItem>
+    </MudGrid>
+
+</MudContainer>
+
+<style>
+    audio::-webkit-media-controls-enclosure {
+        border-radius: 12px;
+        border: solid 1px #eaeaea;
+    }
+
+    audio::-webkit-media-controls-panel, video::-webkit-media-controls-panel {
+        background-color: #ffffff;
+    }
+
+    audio::-webkit-media-controls-volume-control-container {
+        display: none !important;
+    }
+</style>
+

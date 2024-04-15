@@ -1,0 +1,35 @@
+﻿<CascadingValue Value="false" Name="UsePopoverProvider">
+    <MudThemeProvider Theme="MyTheme"></MudThemeProvider>
+    <style>
+        .mud-appbar {
+            background: linear-gradient(45deg, #0080FF, #5A2BE2) !important;
+        }
+    </style>
+</CascadingValue>
+
+@code {
+    public static MudTheme MyTheme => new()
+        {
+            Palette = new PaletteLight()
+            {
+                Primary = "#0080FF", // This will still apply to other elements that use the primary color
+                Secondary = "#ffffff"
+                // Removed AppbarBackground since we are setting it via CSS
+            },
+            PaletteDark = new PaletteDark()
+            {
+                Primary = "#0080FF", // This will still apply to other elements that use the primary color
+                Secondary = "#ffffff"
+                // Removed AppbarBackground since we are setting it via CSS
+            },
+            Typography = new Typography()
+            {
+                Default = new Default()
+                {
+                    FontFamily = new[] { "Poppins", "Helvetica", "Arial", "sans-serif" }
+                }
+            }
+        };
+}
+
+

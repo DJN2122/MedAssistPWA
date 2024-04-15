@@ -1,0 +1,213 @@
+﻿@page "/info"
+@inject IJSRuntime JSRuntime
+@inject ISnackbar Snackbar
+@using Microsoft.AspNetCore.Components
+
+<div style="margin-top: -100px;">
+    <MudText Typo="Typo.h3" Color="Color.Primary" GutterBottom="true">
+        <span id="typewriterText" class="typewriter-text"></span>
+    </MudText>
+</div>
+
+<!-- Placing the MudText outside the MudCarousel for visibility -->
+<MudText Typo="Typo.h5" Color="Color.Primary" GutterBottom="true">Essential Health Tips for Everyday Wellness</MudText>
+
+<MudCarousel Class="mud-width-full" Style="height:300px;" ShowArrows="@arrows" ShowBullets="@bullets" EnableSwipeGesture="@enableSwipeGesture" AutoCycle="@autocycle" TData="object">
+    <MudCarouselItem>
+        <div class="carousel-item-wrapper" style="background-image: url('water.jpg');">
+            <div class="carousel-text">
+                <h2>Stay Hydrated</h2>
+                <p>Drinking enough water is crucial for your overall health.</p>
+            </div>
+        </div>
+    </MudCarouselItem>
+    <MudCarouselItem>
+        <div class="carousel-item-wrapper" style="background-image: url('blueberry.jpeg');">
+            <div class="carousel-text">
+                <h2>Eat Balanced Meals</h2>
+                <p>A balanced diet is key to maintaining your health.</p>
+            </div>
+        </div>
+    </MudCarouselItem>
+    <MudCarouselItem>
+        <div class="carousel-item-wrapper" style="background-image: url('gym.jpeg');">
+            <div class="carousel-text">
+                <h2>Regular Exercise</h2>
+                <p>Keep your body active for longevity and wellness.</p>
+            </div>
+        </div>
+    </MudCarouselItem>
+    <MudCarouselItem>
+        <div class="carousel-item-wrapper" style="background-image: url('moon.jpeg');">
+            <div class="carousel-text">
+                <h2>Sufficient Sleep</h2>
+                <p>Never underestimate the power of a good night's sleep.</p>
+            </div>
+        </div>
+    </MudCarouselItem>
+    <MudCarouselItem>
+        <div class="carousel-item-wrapper" style="background-image: url('hiking.jpeg');">
+            <div class="carousel-text">
+                <h2>Mental Health Matters</h2>
+                <p>Take time for yourself and prioritize your mental health.</p>
+            </div>
+        </div>
+    </MudCarouselItem>
+    <MudCarouselItem>
+        <div class="carousel-item-wrapper" style="background-image: url('mental-health1.jpeg');">
+            <div class="carousel-text">
+                <h2>Regular Check-Ups</h2>
+                <p>Stay on top of your health with regular medical check-ups.</p>
+            </div>
+        </div>
+    </MudCarouselItem>
+    <!-- Add additional MudCarouselItems here -->
+</MudCarousel>
+
+@code {
+    private bool arrows = true;
+    private bool bullets = true;
+    private bool enableSwipeGesture = true;
+    private bool autocycle = true;
+    private Transition transition = Transition.Slide;
+}
+
+<div style="margin-top: 20px; margin-bottom: 20px;">
+    <MudText Typo="Typo.h5" Color="Color.Primary" GutterBottom="true">Your Health, Closer to Home: Find Local Care & Fitness</MudText>
+    <MudText>
+        <div style="display: flex; align-items: center; margin-bottom: 24px;">
+            <MudIcon Icon="@Icons.Material.Filled.Info" Color="Color.Info" />
+            <span style="margin-left: 8px; color: black;">Quickly locate healthcare providers and fitness centers near you with our easy-to-use map tool. Whether you're looking for a hospital, gym, doctor, or pharmacy, we've got you covered.</span>
+        </div>
+    </MudText>
+</div>
+
+<MudItem xs="12" Style="display: flex; justify-content: center;" Class="my-4">
+    <MudStack Row Spacing="2" AlignItems="AlignItems.Center">
+        <div class="select">
+            <select @bind="selectedPlaceType">
+                <option disabled selected value="">Find what you are looking for:</option>
+                <option value="hospital">Find Nearby Hospital</option>
+                <option value="gym">Find Nearby Gym</option>
+                <option value="doctor">Find Nearby Doctor</option>
+                <option value="pharmacy">Find Nearby Pharmacy</option>
+            </select>
+        </div>
+        <MudButton OnClick="ShowPlaces" Variant="Variant.Filled" Color="Color.Primary">Show Places</MudButton>
+    </MudStack>
+</MudItem>
+
+
+<div id="map" style="height: 500px;"></div>
+
+@code {
+    private string selectedPlaceType = "";
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            // Initialize the map first to ensure it's loaded
+            await JSRuntime.InvokeVoidAsync("initMap");
+
+            try
+            {
+                // Proceed with the typewriter effect
+                var text = "Explore Health Tips & Nearby Care!";
+                var typingSpeed = 50;
+                var deletionSpeed = 100;
+                await JSRuntime.InvokeVoidAsync("typeWriter", "typewriterText", text, typingSpeed, deletionSpeed);
+            }
+            catch (JSException jsEx)
+            {
+                Console.Error.WriteLine($"JavaScript interop issue: {jsEx.Message}");
+            }
+            catch (Exception ex)
+            {
+                Console.Error.WriteLine($"An unexpected error occurred: {ex.Message}");
+            }
+        }
+    }
+
+    private async Task ShowPlaces()
+    {
+        // This might need to be moved or called after map initialization based on your app's logic
+        await JSRuntime.InvokeVoidAsync("filterMap", selectedPlaceType);
+    }
+}
+
+<style>
+
+    h1 {
+        margin: 0 0 0.25em;
+        color: black;
+    }
+    /* Design the select tag */
+    select {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        -ms-appearance: none;
+        appearance: none;
+        outline: 0;
+        box-shadow: none;
+        border: 0 !important;
+        background: DeepSkyBlue;
+        background-image: none;
+    }
+
+    .select {
+        position: relative;
+        display: flex;
+        width: 20em;
+        height: 2.8em;
+        line-height: 3;
+        background: #fff;
+        overflow: hidden;
+        border-radius: .25em;
+    }
+
+    select {
+        flex: 1;
+        padding: 0 .5em;
+        color: #fff;
+        cursor: pointer;
+    }
+    /* arrow mark design */
+    .select::after {
+        content: '\25BC';
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding: 0 1em;
+        background: DodgerBlue;
+        cursor: pointer;
+        pointer-events: none;
+        -webkit-transition: .25s all ease;
+        -o-transition: .25s all ease;
+        transition: .25s all ease;
+        color: white;
+    }
+    /* Transition */
+    .select:hover::after {
+        color: Gainsboro;
+    }
+    /* Carousel */
+    .carousel-item-wrapper {
+        height: 300px;
+        overflow: hidden; /* Ensures that all content respects the border-radius */
+        border-radius: 10px; /* Apply rounded corners here */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-size: cover;
+    }
+
+    .carousel-text {
+        background-color: rgba(0, 0, 0, 0.2);
+        color: white;
+        padding: 20px;
+        text-align: center;
+        border-radius: 10px; /* Rounded corners for the text background */
+    }
+</style>
+
