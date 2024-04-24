@@ -42,13 +42,13 @@
 
 <div id="canvas-container"></div> <!-- Canvas container -->
 
-<MudContainer Class="justify-start align-start d-flex flex-column container-upward" MaxWidth="MaxWidth.ExtraExtraLarge" Style="text-align:left; margin-bottom: 3rem;">
+<MudContainer Class="justify-start align-start d-flex flex-column container-upward" MaxWidth="MaxWidth.ExtraExtraLarge" Style="margin-bottom: 3rem;">
     <div>
         <MudText Typo="Typo.h3" Color="Color.Primary" GutterBottom="true">
             <span id="typewriterText" class="typewriter-text"></span>
         </MudText>
     </div>
-    <MudStack Spacing="4">
+    <MudStack Spacing="8">
         <MudText Typo="Typo.h5" Color="Color.Primary" GutterBottom="true">24/7 health support, simplified for anyone to use</MudText>
         <MudButton Color="Color.Primary" Variant="Variant.Filled" Href="/medassist" Size="Size.Large" StartIcon="@Icons.Material.Filled.Chat" Style="font-size: 18px; padding: 12px 24px; z-index: 1000; position: relative;">
             Explore AI-Powered Health Support
@@ -77,10 +77,13 @@
         <!-- Side by side video and Problem / Solution Section -->
         <MudGrid>
             <MudItem xs="12" md="6">
-                <div style="padding: 20px; display: flex; justify-content: center; align-items: center; position: relative;">
+                <!-- Heading for the video -->
+                <MudText Typo="Typo.h5" Color="Color.Primary" GutterBottom="true" Style="text-align: center;">MedAssist: A Quick Tour</MudText>
+
+                <div style="padding: 2px; display: flex; justify-content: center; align-items: center; position: relative;">
                     <!-- Embed the YouTube video using iframe with correct aspect ratio -->
-                    <div style="overflow: hidden; position: relative; width: 100%; height: 0; padding-bottom: 56.25%;">
-                        <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/m513-dRxmVY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <div style="overflow: hidden; position: relative; width: 95%; height: 0; padding-bottom: 50%;">
+                        <iframe style="position: absolute; top: 0; left: 0; width: 95%; height: 95%;" src="https://www.youtube.com/embed/P1lMoJYcKAQ?si=lYU4eOHwkUWOdTBv" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </div>
                 </div>
             </MudItem>
@@ -113,72 +116,67 @@
 
         <MudGrid>
             <MudItem xs="12" sm="4">
-                <MudCard Outlined Class="pa-4 d-flex flex-column align-items-center justify-content-center">
-                    <MudIcon Icon="@Icons.Material.Filled.HealthAndSafety" Size="Size.Large" Color="Color.Primary" Class="my-2" Style="align-self: center;" />
-                    <MudText Typo="Typo.h6" Color="Color.Primary" Align="Align.Center">Instant Health Insights</MudText>
-                    <MudText Align="Align.Center">Ask any health-related question and get immediate AI-powered advice.</MudText>
-                </MudCard>
+                <a href="/medassist">
+                    <MudCard Outlined Class="pa-4 d-flex flex-column align-items-center justify-content-center">
+                        <MudIcon Icon="@Icons.Material.Filled.Chat" Size="Size.Large" Color="Color.Primary" Class="my-2" Style="align-self: center;" />
+                        <MudText Typo="Typo.h6" Color="Color.Primary" Align="Align.Center">AI Medical Assistant & PDF Reports</MudText>
+                        <MudText Align="Align.Center">Engage with our AI assistant for immediate advice and generate PDF reports of your health inquiries.</MudText>
+                    </MudCard>
+                </a>
             </MudItem>
 
             <MudItem xs="12" sm="4">
-                <MudCard Outlined Class="pa-4 d-flex flex-column align-items-center justify-content-center">
-                    <MudIcon Icon="@Icons.Material.Filled.Mic" Size="Size.Large" Color="Color.Primary" Class="my-2" Style="align-self: center;" />
-                    <MudText Typo="Typo.h6" Color="Color.Primary" Align="Align.Center">Voice-Activated Queries</MudText>
-                    <MudText Align="Align.Center">Utilise speech-to-text for hands-free question input and accessibility.</MudText>
-                </MudCard>
+                <a href="/medassist">
+                    <MudCard Outlined Class="pa-4 d-flex flex-column align-items-center justify-content-center">
+                        <MudIcon Icon="@Icons.Material.Filled.Mic" Size="Size.Large" Color="Color.Primary" Class="my-2" Style="align-self: center;" />
+                        <MudText Typo="Typo.h6" Color="Color.Primary" Align="Align.Center">Enhancing Access to Speech & Text</MudText>
+                        <MudText Align="Align.Center">Use speech-to-text for easy communication and text-to-speech for accessible response playback.</MudText>
+                    </MudCard>
+                </a>
             </MudItem>
 
             <MudItem xs="12" sm="4">
-                <MudCard Outlined Class="pa-4 d-flex flex-column align-items-center justify-content-center">
-                    <MudIcon Icon="@Icons.Material.Filled.VolumeUp" Size="Size.Large" Color="Color.Primary" Class="my-2" Style="align-self: center;" />
-                    <MudText Typo="Typo.h6" Color="Color.Primary" Align="Align.Center">Accessible Health Support</MudText>
-                    <MudText Align="Align.Center">Text-to-speech responses make health advice available to everyone.</MudText>
-                </MudCard>
+                <a href="/info">
+                    <MudCard Outlined Class="pa-4 d-flex flex-column align-items-center justify-content-center">
+                        <MudIcon Icon="@Icons.Material.Filled.Place" Size="Size.Large" Color="Color.Primary" Class="my-2" Style="align-self: center;" />
+                        <MudText Typo="Typo.h6" Color="Color.Primary" Align="Align.Center">Local Healthcare Provider Locator</MudText>
+                        <MudText Align="Align.Center">Find nearby healthcare services with our integrated provider locator to ensure timely medical attention.</MudText>
+                    </MudCard>
+                </a>
             </MudItem>
         </MudGrid>
 
-        <!-- Testimonials Section -->
+        <!-- Testimonials Section with Centered Content -->
         <MudText Typo="Typo.h5" Color="Color.Primary" GutterBottom="true" Align="Align.Center">Real Impact: User Stories</MudText>
 
         <MudGrid>
             <MudItem xs="12" sm="4">
-                <MudCard Outlined Class="pa-4 d-flex flex-column align-items-center justify-content-center text-center" Style="height: 100%;">
+                <MudCard Outlined Class="pa-4 d-flex flex-column align-items-center justify-content-center">
                     <MudText Typo="Typo.body1" Align="Align.Center" Class="my-2">"MedAssist quickly provided reliable health advice. It's become my trusted source for health queries due to its ease of use and accessibility."</MudText>
-                    <div style="display: flex; justify-content: center; align-items: center; width: 100%;">
-                        <span style="margin-right: 8px;">
-                            <MudText Typo="Typo.subtitle1" Color="Color.Primary">John Doe</MudText>
-                        </span>
-                        <MudRating Color="Color.Warning" ReadOnly Value="5" Max="5" Size="Size.Medium" />
-                    </div>
+                    <!-- Centered name using MudText with Align property -->
+                    <MudText Typo="Typo.subtitle1" Color="Color.Primary" GutterBottom="true" Align="Align.Center">John Doe</MudText>
                 </MudCard>
             </MudItem>
 
             <MudItem xs="12" sm="4">
-                <MudCard Outlined Class="pa-4 d-flex flex-column align-items-center justify-content-center text-center" Style="height: 100%;">
+                <MudCard Outlined Class="pa-4 d-flex flex-column align-items-center justify-content-center">
                     <MudText Typo="Typo.body1" Align="Align.Center" Class="my-2">"MedAssist's clear and concise advice brought peace of mind during a stressful period. Highly recommend for accurate health information."</MudText>
-                    <div style="display: flex; justify-content: center; align-items: center; width: 100%;">
-                        <span style="margin-right: 8px;">
-                            <MudText Typo="Typo.subtitle1" Color="Color.Primary">Jane Smith</MudText>
-                        </span>
-                        <MudRating Color="Color.Warning" ReadOnly Value="5" Max="5" Size="Size.Medium" />
-                    </div>
+                    <!-- Centered name using MudText with Align property -->
+                    <MudText Typo="Typo.subtitle1" Color="Color.Primary" GutterBottom="true" Align="Align.Center">Jane Smith</MudText>
                 </MudCard>
             </MudItem>
 
             <MudItem xs="12" sm="4">
-                <MudCard Outlined Class="pa-4 d-flex flex-column align-items-center justify-content-center text-center" Style="height: 100%;">
+                <MudCard Outlined Class="pa-4 d-flex flex-column align-items-center justify-content-center">
                     <MudText Typo="Typo.body1" Align="Align.Center" Class="my-2">"Impressed by the swift, accurate advice from MedAssist. It's like 24/7 access to health support, enhancing my health and wellness journey."</MudText>
-                    <div style="display: flex; justify-content: center; align-items: center; width: 100%;">
-                        <span style="margin-right: 8px;">
-                            <MudText Typo="Typo.subtitle1" Color="Color.Primary">Alex Johnson</MudText>
-                        </span>
-                        <MudRating Color="Color.Warning" ReadOnly Value="5" Max="5" Size="Size.Medium" />
-                    </div>
+                    <!-- Centered name using MudText with Align property -->
+                    <MudText Typo="Typo.subtitle1" Color="Color.Primary" GutterBottom="true" Align="Align.Center">Alex Johnson</MudText>
                 </MudCard>
             </MudItem>
         </MudGrid>
+
         <MudText Typo="Typo.body2" Align="Align.Center">
-            We have 50+ 5-Star Reviews on <MudIcon Icon="@Icons.Material.Filled.Star" /> Google
+            We have 50+ 5-Star Reviews on Google
         </MudText>
 
         <!-- Key Highlights Section -->
@@ -187,17 +185,17 @@
         <MudGrid Justify="Justify.Center">
             <MudItem xs="12" sm="4" Class="feature-item">
                 <div style="display: flex; align-items: center; justify-content: center; padding: 10px;">
-                    <MudIcon Icon="@Icons.Material.Filled.StarRate" Color="Color.Primary" />
+                    <MudIcon Icon="@Icons.Material.Filled.Chat" Color="Color.Primary" />
                     <MudText Typo="Typo.body1">
-                        <span style="margin-left: 8px;">Feature 1 - Efficient Workflows</span>
+                        <span style="margin-left: 8px;">Feature 1: AI Medical Assistant</span>
                     </MudText>
                 </div>
             </MudItem>
             <MudItem xs="12" sm="4" Class="feature-item">
                 <div style="display: flex; align-items: center; justify-content: center; padding: 10px;">
-                    <MudIcon Icon="@Icons.Material.Filled.Speed" Color="Color.Primary" />
+                    <MudIcon Icon="@Icons.Material.Filled.Mic" Color="Color.Primary" />
                     <MudText Typo="Typo.body1">
-                        <span style="margin-left: 8px;">Feature 2 - Quick Navigation</span>
+                        <span style="margin-left: 8px;">Feature 2: Speech-to-Text</span>
                     </MudText>
                 </div>
             </MudItem>
@@ -205,7 +203,7 @@
                 <div style="display: flex; align-items: center; justify-content: center; padding: 10px;">
                     <MudIcon Icon="@Icons.Material.Filled.Visibility" Color="Color.Primary" />
                     <MudText Typo="Typo.body1">
-                        <span style="margin-left: 8px;">Feature 3 - Clear Visibility</span>
+                        <span style="margin-left: 8px;">Feature 3: Text-to-Speech</span>
                     </MudText>
                 </div>
             </MudItem>
@@ -213,7 +211,31 @@
                 <div style="display: flex; align-items: center; justify-content: center; padding: 10px;">
                     <MudIcon Icon="@Icons.Material.Filled.ThumbUp" Color="Color.Primary" />
                     <MudText Typo="Typo.body1">
-                        <span style="margin-left: 8px;">Feature 4 - User Approval</span>
+                        <span style="margin-left: 8px;">Feature 4: MedAssist Report Generation</span>
+                    </MudText>
+                </div>
+            </MudItem>
+            <MudItem xs="12" sm="4" Class="feature-item">
+                <div style="display: flex; align-items: center; justify-content: center; padding: 10px;">
+                    <MudIcon Icon="@Icons.Material.Filled.Place" Color="Color.Primary" />
+                    <MudText Typo="Typo.body1">
+                        <span style="margin-left: 8px;">Feature 5: Healthcare Provider Locator</span>
+                    </MudText>
+                </div>
+            </MudItem>
+            <MudItem xs="12" sm="4" Class="feature-item">
+                <div style="display: flex; align-items: center; justify-content: center; padding: 10px;">
+                    <MudIcon Icon="@Icons.Material.Filled.Speed" Color="Color.Primary" />
+                    <MudText Typo="Typo.body1">
+                        <span style="margin-left: 8px;">Feature 6 - Quick Navigation</span>
+                    </MudText>
+                </div>
+            </MudItem>
+            <MudItem xs="12" sm="4" Class="feature-item">
+                <div style="display: flex; align-items: center; justify-content: center; padding: 10px;">
+                    <MudIcon Icon="@Icons.Material.Filled.Visibility" Color="Color.Primary" />
+                    <MudText Typo="Typo.body1">
+                        <span style="margin-left: 8px;">Feature 7 - Clear Visibility</span>
                     </MudText>
                 </div>
             </MudItem>
@@ -221,7 +243,7 @@
                 <div style="display: flex; align-items: center; justify-content: center; padding: 10px;">
                     <MudIcon Icon="@Icons.Material.Filled.Smartphone" Color="Color.Primary" />
                     <MudText Typo="Typo.body1">
-                        <span style="margin-left: 8px;">Feature 5 - Mobile Friendly</span>
+                        <span style="margin-left: 8px;">Feature 8 - Mobile Friendly</span>
                     </MudText>
                 </div>
             </MudItem>
@@ -229,11 +251,12 @@
                 <div style="display: flex; align-items: center; justify-content: center; padding: 10px;">
                     <MudIcon Icon="@Icons.Material.Filled.Update" Color="Color.Primary" />
                     <MudText Typo="Typo.body1">
-                        <span style="margin-left: 8px;">Feature 6 - Regular Updates</span>
+                        <span style="margin-left: 8px;">Feature 9 - Regular Updates</span>
                     </MudText>
                 </div>
             </MudItem>
         </MudGrid>
+
 
         <!-- FAQs Section -->
         <MudText Typo="Typo.h5" Color="Color.Primary" GutterBottom="true" Align="Align.Center">FAQs</MudText>
@@ -256,11 +279,12 @@
         </MudExpansionPanels>
 
         <!-- CTA Section -->
-        <MudText Typo="Typo.h5" Color="Color.Primary" GutterBottom="true" Align="Align.Center">Unlock Your Personalized Health Assistant Now!</MudText>
+        <MudText Typo="Typo.h5" Color="Color.Primary" GutterBottom="true" Align="Align.Center">
+            Unlock Your Personalized Health Assistant Now!
+        </MudText>
         <MudButton Color="Color.Primary" Variant="Variant.Filled" Href="/medassist" Size="Size.Large" StartIcon="@Icons.Material.Filled.Chat" Style="font-size: 18px; padding: 12px 24px; z-index: 1000; position: relative;">
             Explore AI-Powered Health Support
         </MudButton>
-
 
     </MudStack>
 </MudContainer>

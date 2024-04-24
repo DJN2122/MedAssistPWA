@@ -25,8 +25,8 @@
                 <MudTextField Placeholder="Enter your query here or use voice record..." @bind-Value="query" Variant="Variant.Outlined"
                               id="txtPrompt" Margin="Margin.Dense" HelperText="Note: No need to press send icon when using voice record feature."/>
 
-                <MudIconButton Color="Color.Primary" Variant="Variant.Filled" Icon="@Icons.Material.Filled.Mic" id="playbutton" OnClick="@TriggerCallSpeechToText" Class="mt-2" />
-                <MudIconButton Color="Color.Primary" Variant="Variant.Filled" Icon="@Icons.Material.Filled.Send" OnClick="@HandleSendButtonClick" Class="mt-2" />
+                <MudIconButton Color="Color.Primary" Variant="Variant.Filled" Icon="@Icons.Material.Filled.Mic" id="playbutton" OnClick="@TriggerCallSpeechToText" Class="mt-2" Title="Click to start recording your query!" />
+                <MudIconButton Color="Color.Primary" Variant="Variant.Filled" Icon="@Icons.Material.Filled.Send" OnClick="@HandleSendButtonClick" Class="mt-2" Title="Click to send your typed query!" />
             </MudStack>
 
         </MudItem>
@@ -40,7 +40,10 @@
                     }
                     @if (AiMessages.Any())
                     {
-                        <MudIconButton Color="Color.Primary" Variant="Variant.Filled" Icon="@Icons.Material.Filled.RecordVoiceOver" OnClick="@TextToSpeech" Class="mt-2" />
+                        <MudButton Color="Color.Primary" Variant="Variant.Filled" OnClick="@TextToSpeech" Title="Click to Hear the Content Read Aloud" Class="mt-2">
+                            <MudIcon Icon="@Icons.Material.Filled.RecordVoiceOver" />
+                            <span style="margin-left: 10px;">Read Aloud</span>
+                        </MudButton>
                     }
 
                 </MudStack>
@@ -92,6 +95,14 @@
             </MudPaper>
         </MudItem>
     </MudGrid>
+
+    <!-- CTA Section -->
+    <MudText Typo="Typo.h5" Color="Color.Primary" GutterBottom="true" Align="Align.Center" Style="margin-top: 50px;">
+        Info: Discover Local Health Services and Tips!
+    </MudText>
+    <MudButton Color="Color.Primary" Variant="Variant.Filled" Href="/info" Size="Size.Large" StartIcon="@Icons.Material.Filled.Map" Style="font-size: 18px; padding: 12px 24px; z-index: 1000; position: relative;">
+        Explore Your Local Options
+    </MudButton>
 
 </MudContainer>
 

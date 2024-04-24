@@ -9,60 +9,87 @@
     </MudText>
 </div>
 
-<!-- Placing the MudText outside the MudCarousel for visibility -->
-<MudText Typo="Typo.h5" Color="Color.Primary" GutterBottom="true">Essential Health Tips for Everyday Wellness</MudText>
+<MudContainer Class="d-flex flex-column" MaxWidth="MaxWidth.ExtraExtraLarge">
+    <!-- Placing the MudText outside the MudCarousel for visibility -->
+    <MudText Typo="Typo.h5" Color="Color.Primary" GutterBottom="true">Essential Health Tips for Everyday Wellness</MudText>
 
-<MudCarousel Class="mud-width-full" Style="height:300px;" ShowArrows="@arrows" ShowBullets="@bullets" EnableSwipeGesture="@enableSwipeGesture" AutoCycle="@autocycle" TData="object">
-    <MudCarouselItem>
-        <div class="carousel-item-wrapper" style="background-image: url('water.jpg');">
-            <div class="carousel-text">
-                <h2>Stay Hydrated</h2>
-                <p>Drinking enough water is crucial for your overall health.</p>
+    <MudCarousel Class="mud-width-full" Style="height:300px;" ShowArrows="@arrows" ShowBullets="@bullets" EnableSwipeGesture="@enableSwipeGesture" AutoCycle="@autocycle" TData="object">
+        <MudCarouselItem>
+            <div class="carousel-item-wrapper" style="background-image: url('water.jpg');">
+                <div class="carousel-text">
+                    <h2>Stay Hydrated</h2>
+                    <p>Drinking enough water is crucial for your overall health.</p>
+                </div>
             </div>
-        </div>
-    </MudCarouselItem>
-    <MudCarouselItem>
-        <div class="carousel-item-wrapper" style="background-image: url('blueberry.jpeg');">
-            <div class="carousel-text">
-                <h2>Eat Balanced Meals</h2>
-                <p>A balanced diet is key to maintaining your health.</p>
+        </MudCarouselItem>
+        <MudCarouselItem>
+            <div class="carousel-item-wrapper" style="background-image: url('blueberry.jpeg');">
+                <div class="carousel-text">
+                    <h2>Eat Balanced Meals</h2>
+                    <p>A balanced diet is key to maintaining your health.</p>
+                </div>
             </div>
-        </div>
-    </MudCarouselItem>
-    <MudCarouselItem>
-        <div class="carousel-item-wrapper" style="background-image: url('gym.jpeg');">
-            <div class="carousel-text">
-                <h2>Regular Exercise</h2>
-                <p>Keep your body active for longevity and wellness.</p>
+        </MudCarouselItem>
+        <MudCarouselItem>
+            <div class="carousel-item-wrapper" style="background-image: url('gym.jpeg');">
+                <div class="carousel-text">
+                    <h2>Regular Exercise</h2>
+                    <p>Keep your body active for longevity and wellness.</p>
+                </div>
             </div>
-        </div>
-    </MudCarouselItem>
-    <MudCarouselItem>
-        <div class="carousel-item-wrapper" style="background-image: url('moon.jpeg');">
-            <div class="carousel-text">
-                <h2>Sufficient Sleep</h2>
-                <p>Never underestimate the power of a good night's sleep.</p>
+        </MudCarouselItem>
+        <MudCarouselItem>
+            <div class="carousel-item-wrapper" style="background-image: url('moon.jpeg');">
+                <div class="carousel-text">
+                    <h2>Sufficient Sleep</h2>
+                    <p>Never underestimate the power of a good night's sleep.</p>
+                </div>
             </div>
-        </div>
-    </MudCarouselItem>
-    <MudCarouselItem>
-        <div class="carousel-item-wrapper" style="background-image: url('hiking.jpeg');">
-            <div class="carousel-text">
-                <h2>Mental Health Matters</h2>
-                <p>Take time for yourself and prioritize your mental health.</p>
+        </MudCarouselItem>
+        <MudCarouselItem>
+            <div class="carousel-item-wrapper" style="background-image: url('hiking.jpeg');">
+                <div class="carousel-text">
+                    <h2>Mental Health Matters</h2>
+                    <p>Take time for yourself and prioritize your mental health.</p>
+                </div>
             </div>
-        </div>
-    </MudCarouselItem>
-    <MudCarouselItem>
-        <div class="carousel-item-wrapper" style="background-image: url('mental-health1.jpeg');">
-            <div class="carousel-text">
-                <h2>Regular Check-Ups</h2>
-                <p>Stay on top of your health with regular medical check-ups.</p>
+        </MudCarouselItem>
+        <MudCarouselItem>
+            <div class="carousel-item-wrapper" style="background-image: url('mental-health1.jpeg');">
+                <div class="carousel-text">
+                    <h2>Regular Check-Ups</h2>
+                    <p>Stay on top of your health with regular medical check-ups.</p>
+                </div>
             </div>
-        </div>
-    </MudCarouselItem>
-    <!-- Add additional MudCarouselItems here -->
-</MudCarousel>
+        </MudCarouselItem>
+        <!-- Add additional MudCarouselItems here -->
+    </MudCarousel>
+
+    <div style="margin-top: 50px; margin-bottom: 5px;">
+        <MudText Typo="Typo.h5" Color="Color.Primary" GutterBottom="true">Your Health, Closer to Home: Find Local Care & Fitness</MudText>
+        <MudText>
+            <div style="display: flex; align-items: center; margin-bottom: 24px;">
+                <MudIcon Icon="@Icons.Material.Filled.Info" Color="Color.Info" />
+                <span style="margin-left: 8px; color: black;">Quickly locate healthcare providers and fitness centers near you with our easy-to-use map tool. Whether you're looking for a hospital, gym, doctor, or pharmacy, we've got you covered.</span>
+            </div>
+        </MudText>
+    </div>
+
+    <MudItem xs="12" Style="display: flex; justify-content: center;" Class="my-4">
+        <MudStack Row Spacing="2" AlignItems="AlignItems.Center">
+            <div class="select">
+                <select @bind="selectedPlaceType">
+                    <option disabled selected value="">Find what you are looking for:</option>
+                    <option value="hospital">Find Nearby Hospital</option>
+                    <option value="gym">Find Nearby Gym</option>
+                    <option value="doctor">Find Nearby Doctor</option>
+                    <option value="pharmacy">Find Nearby Pharmacy</option>
+                </select>
+            </div>
+            <MudButton OnClick="ShowPlaces" Variant="Variant.Filled" Color="Color.Primary" Title="Click to search and display nearby healthcare and fitness locations on the map.">Show Places</MudButton>
+        </MudStack>
+    </MudItem>
+</MudContainer>
 
 @code {
     private bool arrows = true;
@@ -72,33 +99,7 @@
     private Transition transition = Transition.Slide;
 }
 
-<div style="margin-top: 20px; margin-bottom: 20px;">
-    <MudText Typo="Typo.h5" Color="Color.Primary" GutterBottom="true">Your Health, Closer to Home: Find Local Care & Fitness</MudText>
-    <MudText>
-        <div style="display: flex; align-items: center; margin-bottom: 24px;">
-            <MudIcon Icon="@Icons.Material.Filled.Info" Color="Color.Info" />
-            <span style="margin-left: 8px; color: black;">Quickly locate healthcare providers and fitness centers near you with our easy-to-use map tool. Whether you're looking for a hospital, gym, doctor, or pharmacy, we've got you covered.</span>
-        </div>
-    </MudText>
-</div>
-
-<MudItem xs="12" Style="display: flex; justify-content: center;" Class="my-4">
-    <MudStack Row Spacing="2" AlignItems="AlignItems.Center">
-        <div class="select">
-            <select @bind="selectedPlaceType">
-                <option disabled selected value="">Find what you are looking for:</option>
-                <option value="hospital">Find Nearby Hospital</option>
-                <option value="gym">Find Nearby Gym</option>
-                <option value="doctor">Find Nearby Doctor</option>
-                <option value="pharmacy">Find Nearby Pharmacy</option>
-            </select>
-        </div>
-        <MudButton OnClick="ShowPlaces" Variant="Variant.Filled" Color="Color.Primary">Show Places</MudButton>
-    </MudStack>
-</MudItem>
-
-
-<div id="map" style="height: 500px;"></div>
+<div id="map" style="height: 600px; width: 95%; margin: auto;"></div>
 
 @code {
     private string selectedPlaceType = "";

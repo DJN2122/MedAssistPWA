@@ -1,34 +1,49 @@
 ﻿@inherits LayoutComponentBase
 @inject IJSRuntime JSRuntime
 
+<!-- Container for the layout of the entire page, establishing a flex column structure -->
 <div class="page-container">
+    <!-- Main layout structure provided by MudBlazor -->
     <MudLayout style="flex-grow: 1; display: flex; flex-direction: column;">
         <MudAppBar Elevation="0">
             <MudLink Href="/" Underline="Underline.None" Style="display: flex; align-items: center; justify-content: center; height: 100%;">
                 <img src="MedAssist-logo-poppins.png" alt="MedAssist Logo" style="height: auto; max-height: 90%;" />
             </MudLink>
+            <div class="desktop-links">
+                <MudStack Row Spacing="4">
+                    <MudLink Underline="Underline.Hover" Href="/" Color="Color.Secondary">
+                        <div style="display: flex; align-items: center;">
+                            <MudIcon Icon="@Icons.Material.Filled.Home" />
+                            <span style="margin-left: 5px;">Home</span>
+                        </div>
+                    </MudLink>
+                    <MudLink Underline="Underline.Hover" Href="/medassist" Color="Color.Secondary">
+                        <div style="display: flex; align-items: center;">
+                            <MudIcon Icon="@Icons.Material.Filled.LocalHospital" />
+                            <span style="margin-left: 5px;">MedAssist</span>
+                        </div>
+                    </MudLink>
+                    <MudLink Underline="Underline.Hover" Href="/info" Color="Color.Secondary">
+                        <div style="display: flex; align-items: center;">
+                            <MudIcon Icon="@Icons.Material.Filled.Info" />
+                            <span style="margin-left: 5px;">Info</span>
+                        </div>
+                    </MudLink>
+                </MudStack>
+            </div>
+            <!-- MudSpacer to push the icon button to the right -->
             <MudSpacer />
-            <MudStack Row Spacing="4">
-                <MudLink Underline="Underline.Hover" Href="/" Color="Color.Secondary">
-                    <div style="display: flex; align-items: center;">
-                        <MudIcon Icon="@Icons.Material.Filled.Home" />
-                        <span style="margin-left: 5px;">Home</span>
-                    </div>
-                </MudLink>
-                <MudLink Underline="Underline.Hover" Href="/medassist" Color="Color.Secondary">
-                    <div style="display: flex; align-items: center;">
-                        <MudIcon Icon="@Icons.Material.Filled.LocalHospital" />
-                        <span style="margin-left: 5px;">MedAssist</span>
-                    </div>
-                </MudLink>
-                <MudLink Underline="Underline.Hover" Href="/info" Color="Color.Secondary">
-                    <div style="display: flex; align-items: center;">
-                        <MudIcon Icon="@Icons.Material.Filled.Info" />
-                        <span style="margin-left: 5px;">Info</span>
-                    </div>
-                </MudLink>
-            </MudStack>
+            <MudIconButton Icon="@Icons.Material.Filled.Menu" Edge="Edge.End" Color="Color.Inherit" OnClick="ToggleDrawer" Class="menu-btn" />
         </MudAppBar>
+
+        <!-- Drawer that appears from the side on smaller screens, houses navigation links -->
+        <MudDrawer @bind-Open="_drawerOpen" Anchor="Anchor.Right" ClipMode="DrawerClipMode.Never" Elevation="1" class="mobile-drawer">
+            <MudNavMenu>
+                <MudNavLink Href="/" Icon="@Icons.Material.Filled.Home">Home</MudNavLink>
+                <MudNavLink Href="/medassist" Icon="@Icons.Material.Filled.LocalHospital">MedAssist</MudNavLink>
+                <MudNavLink Href="/info" Icon="@Icons.Material.Filled.Info">Info</MudNavLink>
+            </MudNavMenu>
+        </MudDrawer>
 
         <MudMainContent style="flex-grow: 1;">
             <MudContainer MaxWidth="MaxWidth.Large" Class="my-16 pt-16">
@@ -36,15 +51,25 @@
             </MudContainer>
         </MudMainContent>
 
-        <!-- Footer -->
+        <!-- Footer at the bottom of the layout -->
         <footer class="footer">
-            <MudText Color="Color.Secondary" Typo="Typo.subtitle2">© 2024 Copyright: David Niculita</MudText>
+            <MudText Color="Color.Secondary" Typo="Typo.subtitle2">
+                © 2024 Copyright: David Niculita
+            </MudText>
+            <!-- Privacy Policy Link -->
+            <MudLink Href="https://www.freeprivacypolicy.com/live/52ff44c6-f387-42b1-9115-9873cbbf79c1" Color="Color.Secondary" Underline="Underline.Hover">
+                Privacy Policy
+            </MudLink>
         </footer>
     </MudLayout>
 
-    <MudFab Color="Color.Primary" Variant="Variant.Filled" Size="Size.Small" StartIcon="@Icons.Material.Filled.KeyboardArrowUp" Class="back-to-top" OnClick="ScrollToTop" Style="display:none; position: fixed; right: 0.5rem; bottom: 3.5rem;" />
+    <MudFab Color="Color.Primary" Variant="Variant.Filled" Size="Size.Small" StartIcon="@Icons.Material.Filled.KeyboardArrowUp" Class="back-to-top" OnClick="ScrollToTop" Style="display:none; position: fixed; right: 0.5rem; bottom: 4rem;" />
+
+    <!-- Feedback Tab -->
+    <a href="https://forms.office.com/e/DdXuYQ5pPk" target="_blank" class="feedback-tab" title="Click to provide feedback on this project!">FEEDBACK</a>
 </div>
 
+<!-- Styling section defining appearance and behavior of elements -->
 <style>
     .page-container {
         display: flex;
@@ -55,12 +80,63 @@
     .footer {
         width: 100%;
         text-align: center;
-        padding: 1rem 0;
+        padding: 0.25rem 0;
         background: linear-gradient(45deg, #0080FF, #5A2BE2) !important;
         margin-top: auto; /* This pushes the footer to the bottom */
     }
+
+    .feedback-tab {
+        position: fixed;
+        left: 0;
+        top: 90%;
+        transform: rotate(-90deg);
+        transform-origin: top left;
+        background: linear-gradient(45deg, #0080FF, #5A2BE2) !important;
+        color: white;
+        padding: 4px 9px;
+        text-align: center;
+        border-radius: 0 0 6px 6px;
+        font-size: 12px;
+        cursor: pointer;
+        transition: padding 0.15s ease, font-size 0.15s ease; /* Smooth transition for padding and font size */
+    }
+
+    .feedback-tab:hover {
+        padding: 5px 11px;
+        font-size: 13px;
+    }
+
+    .menu-btn {
+        display: none; /* Hide menu button on desktop by default */
+        margin-right: 5px;
+    }
+
+    .mobile-drawer {
+        display: none; /* Hide mobile drawer on desktop by default */
+    }
+
+    .desktop-links {
+        display: flex;
+        justify-content: flex-end;
+        width: 100%; /* This ensures the desktop-links div expands to fill available space */
+    }
+
+    @@media (max-width: 768px) {
+        .desktop-links {
+            display: none; /* Hide desktop links on mobile */
+        }
+
+        .menu-btn {
+            display: block; /* Show menu button on mobile */
+        }
+
+        .mobile-drawer {
+            display: block; /* Show mobile drawer on mobile */
+        }
+    }
 </style>
 
+<!-- JavaScript section for interactivity, such as the back-to-top button -->
 <script>
     window.initializeBackToTopButtonVisibility = () => {
         const backToTopButton = document.querySelector('.back-to-top');
@@ -75,7 +151,15 @@
     };
 </script>
 
+<!-- Code block section defining C# methods and properties for interactivity -->
 @code {
+    private bool _drawerOpen;
+
+    private void ToggleDrawer()
+    {
+        _drawerOpen = !_drawerOpen;
+    }
+
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)

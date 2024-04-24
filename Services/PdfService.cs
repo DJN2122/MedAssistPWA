@@ -37,7 +37,7 @@ namespace MedAssistPWA.Services
             {
                 string processedUserMessage = InsertLineBreaksAfterPeriod(userMessages[i]);
                 string processedAiMessage = InsertLineBreaksAfterPeriod(aiMessages[i]);
-                string message = $"\nUser: {processedUserMessage}\n\nAI Medical Assistant: {processedAiMessage}";
+                string message = $"\nUser: {processedUserMessage}\n\nMedAssist: {processedAiMessage}";
 
                 var textSize = graphics.MeasureString(message, font, XStringFormats.TopLeft);
                 double wrappedHeight = Math.Ceiling(textSize.Width / (pageWidth - marginLeft - marginRight)) * textSize.Height;
