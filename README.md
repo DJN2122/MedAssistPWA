@@ -19,7 +19,7 @@ MedAssist is a personal project designed to bridge the gap between advanced arti
 
 Watch the introduction video below to see MedAssist in action. This video offers a quick overview of the user interface, key features, and demonstrates user interactions with the AI for discussing health concerns and accessing medical information. It's designed to show how MedAssist can be a vital tool in managing healthcare effectively.
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/P1lMoJYcKAQ?si=3mCMkpDjnAI4n1AO" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+[![MedAssist Introduction Video](https://img.youtube.com/vi/P1lMoJYcKAQ/0.jpg)](https://www.youtube.com/watch?v=P1lMoJYcKAQ)
 
 ## How to Run the Project in Visual Studio
 
@@ -56,9 +56,7 @@ After forking the project, it is essential to configure the application with you
    - Open the `index.html` file.
    - On line 35, replace the placeholder `"INSERT GOOGLE PLACES API KEY HERE"` with your Google Places API key in the script source URL:
      ```html
-     <script async
-            src="https://maps.googleapis.com/maps/api/js?key=INSERT GOOGLE PLACES API KEY HERE&callback=initMap"
-    </script>
+     <script async src="https://maps.googleapis.com/maps/api/js?key=INSERT GOOGLE PLACES API KEY HERE&callback=initMap"></script>
      ```
 
 Please ensure that all API keys are correctly inserted to take full advantage of MedAssist’s capabilities, from AI-powered interactions to local healthcare service mapping.
